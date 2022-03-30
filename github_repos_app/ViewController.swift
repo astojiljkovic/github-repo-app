@@ -115,7 +115,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let repoName = repo.name else {return}
         guard let repoFullName = repo.full_name else {return}
-        guard let description = repo.description else {return}
+        let description = repo.description ?? ""
         guard let stargazers_count = repo.stargazers_count else {return}
         guard let numberOfForks = repo.forks_count else {return}
         

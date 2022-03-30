@@ -10,6 +10,25 @@ import UIKit
 
 class RepoDetailsViewController: UIViewController {
     
+    private let starPic: UIButton = {
+        let button = UIButton()
+        var image = UIImage(systemName: "star.fill",withConfiguration: UIImage.SymbolConfiguration(pointSize: 15))
+//        image = image?.withRenderingMode(.alwaysOriginal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(image, for: .normal)
+        button.tintColor = .white
+        return button
+    }()
+    private let forkPic: UIButton = {
+        let button = UIButton()
+        var image = UIImage(systemName: "tuningfork",withConfiguration: UIImage.SymbolConfiguration(pointSize: 15))
+//        image = image?.withRenderingMode(.alwaysOriginal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(image, for: .normal)
+        button.tintColor = .white
+        return button
+    }()
+    
     var avatarImg: UIImageView = {
         var img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
@@ -34,6 +53,7 @@ class RepoDetailsViewController: UIViewController {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
     
@@ -41,10 +61,7 @@ class RepoDetailsViewController: UIViewController {
         var label = UILabel()
         label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.layer.borderWidth = 3
-        label.layer.borderColor = UIColor.white.cgColor
-        label.layer.cornerRadius = 2
-        //vidi kako da rasiris ovo cudo od bordera
+
 
         return label
     }()
@@ -59,11 +76,22 @@ class RepoDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//
+//        let attrs = [
+//            NSAttributedString.Key.foregroundColor: UIColor.white,
+//            NSAttributedString.Key.font: UIFont(name: "Georgia-Bold", size: 5)!
+//        ]
+//
+//        UINavigationBar.appearance().titleTextAttributes = attrs
+        
         
         view.backgroundColor = .systemBackground
         view.addSubview(titleLabel)
         view.addSubview(avatarImg)
-        view.addSubview(fullNameLabel)
+//        view.addSubview(fullNameLabel)
+//        navigationItem.title = fullNameLabel.text
+        view.addSubview(starPic)
+        view.addSubview(forkPic)
         view.addSubview(descriptionLabel)
         view.addSubview(numberOfStars)
         view.addSubview(numberOfForks)
@@ -95,20 +123,31 @@ class RepoDetailsViewController: UIViewController {
         
         let descriptionLabelConstraints = [
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
+            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20)
+//            descriptionLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ]
+        
+        let starPicConstraints = [
+            starPic.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            starPic.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
         ]
         
         let numberOfStarsConstraint = [
-//            numberOfStars.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            numberOfStars.leadingAnchor.constraint(equalTo: starPic.trailingAnchor, constant: 15),
             numberOfStars.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
 //            numberOfStars.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            numberOfStars.centerXAnchor.constraint(equalTo: view.centerXAnchor,constant: -50)
+//            numberOfStars.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ]
+        let forkPicConstraints = [
+            forkPic.leadingAnchor.constraint(equalTo: numberOfStars.trailingAnchor, constant: 20),
+            forkPic.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
         ]
         let numberOfForksConstraint = [
 //            numberOfForks.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 50),
             numberOfForks.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
-            numberOfForks.leadingAnchor.constraint(equalTo: numberOfStars.trailingAnchor, constant: 25),
+            numberOfForks.leadingAnchor.constraint(equalTo: forkPic.trailingAnchor, constant: 15),
 //            numberOfForks.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 //            numberOfForks.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
@@ -116,7 +155,9 @@ class RepoDetailsViewController: UIViewController {
 //        NSLayoutConstraint.activate(avatarImgConstraints)
         NSLayoutConstraint.activate(titleLabelConstraints)
         NSLayoutConstraint.activate(descriptionLabelConstraints)
+        NSLayoutConstraint.activate(starPicConstraints)
         NSLayoutConstraint.activate(numberOfStarsConstraint)
+        NSLayoutConstraint.activate(forkPicConstraints)
         NSLayoutConstraint.activate(numberOfForksConstraint)
         
     }
