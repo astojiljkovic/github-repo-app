@@ -9,16 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private var repos: [Repo] = [Repo]()
-    
-//    let labelica: UILabel = {
-//        let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        return label
-//    }()
-
-    
+    private var repos: [Repo] = []
+        
     
     private let table: UITableView = {
         let table = UITableView()
@@ -58,17 +50,35 @@ class ViewController: UIViewController {
         table.frame = view.bounds
     }
     func fetchData () {
+//        Task{ [weak self] in
+//            let repos = await APICaller.shared.getRepos2()
+//            let firstCellIndex = self?.repos.count ?? 0
+//            let lastCellIndex = firstCellIndex + repos.count - 1
+//            self?.repos.append(contentsOf: repos)
+//
+//            DispatchQueue.main.async { [weak self] in
+//                var indexPaths = Array((firstCellIndex...lastCellIndex)).map { index in
+//                    IndexPath(row: index , section: 0)
+//                }
+//                self?.table.insertRows(at: indexPaths, with: .right)
+//            }
+//
+//        }
+     
         APICaller.shared.getRepos { [weak self] result in
             switch result {
             case .success(let repos):
+                let firstCellIndex = self?.repos.count ?? 0
+                var lastCellIndex = firstCellIndex + repos.count - 1
+                self?.repos.append(contentsOf: repos)
 
-//                print("\(repos) wowoowowowow")
-                
-                self?.repos = repos
-//                try self?.repos.sorted(by: {$0.stargazers_count > $1.stargazers_count})
-                
                 DispatchQueue.main.async {
-                    self?.table.reloadData()
+                    var indexPaths = Array((firstCellIndex...lastCellIndex)).map { index in
+                        IndexPath(row: index , section: 0)
+                    }
+                    self?.table.insertRows(at: indexPaths, with: .right)
+//                    self?.table.reloadData()
+
                 }
             case .failure(let error):
                 print("pera perica")
@@ -119,14 +129,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         guard let stargazers_count = repo.stargazers_count else {return}
         guard let numberOfForks = repo.forks_count else {return}
         
+        
         let vc = RepoDetailsViewController()
         
-        vc.configure(with: RepoPreviewViewModel(title: repoName, fullName: repoFullName, description: description, numberOfStars: stargazers_count, numberOfForks: numberOfForks))
+        vc.configure(with: RepoPreviewViewModel(title: repoName, fullName: repoFullName, description: description, numberOfStars: stargazers_count, numberOfForks: numberOfForks, avatar_url: repo.owner.avatar_url ?? ""))
         self.navigationController?.pushViewController(vc, animated: true)
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == repos.count - 1 {
-            print("na kraju smo")
+            fetchData()
         }
     }
     

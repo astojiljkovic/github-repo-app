@@ -27,20 +27,6 @@ class APICaller {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
         dateFormatter.string(from: date)
-        
-//        print(date)
-//        print(dateFormatter.string(from: date))
-//        print("ovde sam hehe")
-        //https://api.github.com/repos/NCX-Programming/RNGTool/releases/latest za ovaj link radi, prodje guard
-        //https://stackoverflow.com/questions/69624063/how-could-you-access-the-github-api-in-swift
-        //https://api.github.com/search/repositories?q=created:>2022-03-20
-        
-        //iz nekog razloga ovaj jebeni link nece da otvori
-//        let string = "https://api.github.com/search/repositories?q=created:>2022-03-20"
-//        if string.isValidURL {
-//            // TODO
-//            print("molim te nesto ljubim te")
-//        }
 
         var components = URLComponents()
             components.scheme = "https"
@@ -81,6 +67,35 @@ class APICaller {
         task.resume()
         
     }
+//    func getRepos2() async -> [Repo]{
+//
+//        let date = Calendar.current.date(byAdding: .day , value: -7, to: .now)!
+//
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "YYYY-MM-dd"
+//        dateFormatter.string(from: date)
+//
+//        var components = URLComponents()
+//            components.scheme = "https"
+//            components.host = "api.github.com"
+//            components.path = "/search/repositories"
+//            components.queryItems = [
+//                URLQueryItem(name: "q", value: "created:>\(dateFormatter.string(from: date))")
+//            ]
+////        print(components.url)
+//        guard let url = components.url else {return []}
+//
+////        print("ovde sam oopet")
+//
+//        do{
+//            let (data , _) = try await URLSession.shared.data(from: url)
+//            let results = try JSONDecoder().decode(ReposResponse.self, from: data)
+//            return results.items
+//        }catch(let error){
+//            print(error)
+//            return []
+//        }
+//    }
 
  
 }

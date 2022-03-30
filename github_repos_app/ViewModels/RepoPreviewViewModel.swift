@@ -13,5 +13,6 @@ struct RepoPreviewViewModel {
     let description: String
     let numberOfStars: Int
     let numberOfForks: Int
+    let avatar_url: String
     
 }

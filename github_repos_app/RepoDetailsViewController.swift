@@ -40,6 +40,7 @@ class RepoDetailsViewController: UIViewController {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .red
+        
         return label
     }()
     
@@ -89,7 +90,10 @@ class RepoDetailsViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(avatarImg)
 //        view.addSubview(fullNameLabel)
-//        navigationItem.title = fullNameLabel.text
+//        navigationController?.navigationBar.prefersLargeTitles = false
+        //namestanje da title u navbaru, samo za ovaj viewcontroller
+        navigationItem.largeTitleDisplayMode = .never
+        title = fullNameLabel.text
         view.addSubview(starPic)
         view.addSubview(forkPic)
         view.addSubview(descriptionLabel)
@@ -111,13 +115,15 @@ class RepoDetailsViewController: UIViewController {
     
     func applyConstraints(){
         
-//        let avatarImgConstraints = [
-//            avatarImg.topAnchor.constraint(equalTo: view.topAnchor, constant: 120),
-//            avatarImg.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-//        ]
+        let avatarImgConstraints = [
+            avatarImg.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            avatarImg.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            avatarImg.widthAnchor.constraint(equalToConstant: 150),
+            avatarImg.heightAnchor.constraint(equalToConstant: 150)
+        ]
         
         let titleLabelConstraints = [
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 120),
+            titleLabel.topAnchor.constraint(equalTo: avatarImg.bottomAnchor, constant: 70),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
         
@@ -130,13 +136,15 @@ class RepoDetailsViewController: UIViewController {
         ]
         
         let starPicConstraints = [
-            starPic.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            starPic.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             starPic.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
+            starPic.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100)
         ]
         
         let numberOfStarsConstraint = [
-            numberOfStars.leadingAnchor.constraint(equalTo: starPic.trailingAnchor, constant: 15),
+            numberOfStars.leadingAnchor.constraint(equalTo: starPic.trailingAnchor, constant: 10),
             numberOfStars.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
+//            numberOfStars.trailingAnchor.constraint(equalTo: forkPic.leadingAnchor, constant: 10)
 //            numberOfStars.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 //            numberOfStars.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
@@ -148,11 +156,11 @@ class RepoDetailsViewController: UIViewController {
 //            numberOfForks.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 50),
             numberOfForks.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
             numberOfForks.leadingAnchor.constraint(equalTo: forkPic.trailingAnchor, constant: 15),
-//            numberOfForks.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//            numberOfForks.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 50),
 //            numberOfForks.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
         
-//        NSLayoutConstraint.activate(avatarImgConstraints)
+        NSLayoutConstraint.activate(avatarImgConstraints)
         NSLayoutConstraint.activate(titleLabelConstraints)
         NSLayoutConstraint.activate(descriptionLabelConstraints)
         NSLayoutConstraint.activate(starPicConstraints)
@@ -168,11 +176,31 @@ class RepoDetailsViewController: UIViewController {
         numberOfStars.text = "\(String(model.numberOfStars)) Stars"
         numberOfForks.text = "\(String(model.numberOfForks)) Forks"
         fullNameLabel.text = model.fullName
+        guard let url = URL(string: model.avatar_url) else {return}
+        avatarImg.load(url: url)
+                
+//                guard let url = URL(string: "\(Constants.baseURL)/3/trending/movie/day?api_key=\(Constants.API_KEY)") else {return}
+        
 //        title = fullNameLabel.text
 //        navigationItem.title = fullNameLabel.text
         
         
 //        guard let url = URL(string: "https://www.youtube.com/embed/\(model.youtubeVideo.id.videoId)") else {return}
 //        webView.load(URLRequest(url: url))
+    }
+}
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async{ [weak self] in
+            if let data = try? Data(contentsOf: url){
+                if let image = UIImage(data: data){
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                    
+                }
+            }
+            
+        }
     }
 }

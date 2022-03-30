@@ -20,7 +20,10 @@ struct Repo: Codable {
     let forks_count: Int?
     let stargazers_count: Int?
     let id: Int
-    
+    let owner: Owner
+}
+struct Owner: Codable {
+    let avatar_url: String?
 }
 /*
  
