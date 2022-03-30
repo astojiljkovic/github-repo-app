@@ -14,6 +14,12 @@
 		55FA021627EE88E8009A6AB4 /* github_repos_app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55FA021427EE88E8009A6AB4 /* github_repos_app.xcdatamodeld */; };
 		55FA021827EE88EB009A6AB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55FA021727EE88EB009A6AB4 /* Assets.xcassets */; };
 		55FA021B27EE88EB009A6AB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55FA021927EE88EB009A6AB4 /* LaunchScreen.storyboard */; };
+		55FA022327EE8A18009A6AB4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA022227EE8A18009A6AB4 /* TableViewCell.swift */; };
+		55FA022627EF2CAB009A6AB4 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA022527EF2CAB009A6AB4 /* Repo.swift */; };
+		55FA022927F06318009A6AB4 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA022827F06318009A6AB4 /* APICaller.swift */; };
+		55FA022C27F07162009A6AB4 /* RepoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA022B27F07162009A6AB4 /* RepoViewModel.swift */; };
+		55FA022E27F1E4C6009A6AB4 /* RepoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA022D27F1E4C5009A6AB4 /* RepoDetailsViewController.swift */; };
+		55FA023027F38449009A6AB4 /* RepoPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA022F27F38449009A6AB4 /* RepoPreviewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,12 @@
 		55FA021727EE88EB009A6AB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55FA021A27EE88EB009A6AB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55FA021C27EE88EB009A6AB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55FA022227EE8A18009A6AB4 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		55FA022527EF2CAB009A6AB4 /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
+		55FA022827F06318009A6AB4 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		55FA022B27F07162009A6AB4 /* RepoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewModel.swift; sourceTree = "<group>"; };
+		55FA022D27F1E4C5009A6AB4 /* RepoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailsViewController.swift; sourceTree = "<group>"; };
+		55FA022F27F38449009A6AB4 /* RepoPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPreviewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +70,14 @@
 		55FA020A27EE88E8009A6AB4 /* github_repos_app */ = {
 			isa = PBXGroup;
 			children = (
+				55FA022A27F07146009A6AB4 /* ViewModels */,
+				55FA022727F06309009A6AB4 /* Managers */,
+				55FA022427EF2C90009A6AB4 /* Models */,
 				55FA020B27EE88E8009A6AB4 /* AppDelegate.swift */,
 				55FA020D27EE88E8009A6AB4 /* SceneDelegate.swift */,
 				55FA020F27EE88E8009A6AB4 /* ViewController.swift */,
+				55FA022D27F1E4C5009A6AB4 /* RepoDetailsViewController.swift */,
+				55FA022227EE8A18009A6AB4 /* TableViewCell.swift */,
 				55FA021127EE88E8009A6AB4 /* Main.storyboard */,
 				55FA021727EE88EB009A6AB4 /* Assets.xcassets */,
 				55FA021927EE88EB009A6AB4 /* LaunchScreen.storyboard */,
@@ -68,6 +85,31 @@
 				55FA021427EE88E8009A6AB4 /* github_repos_app.xcdatamodeld */,
 			);
 			path = github_repos_app;
+			sourceTree = "<group>";
+		};
+		55FA022427EF2C90009A6AB4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				55FA022527EF2CAB009A6AB4 /* Repo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		55FA022727F06309009A6AB4 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				55FA022827F06318009A6AB4 /* APICaller.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		55FA022A27F07146009A6AB4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				55FA022B27F07162009A6AB4 /* RepoViewModel.swift */,
+				55FA022F27F38449009A6AB4 /* RepoPreviewViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,9 +183,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55FA022C27F07162009A6AB4 /* RepoViewModel.swift in Sources */,
+				55FA022327EE8A18009A6AB4 /* TableViewCell.swift in Sources */,
 				55FA021627EE88E8009A6AB4 /* github_repos_app.xcdatamodeld in Sources */,
 				55FA021027EE88E8009A6AB4 /* ViewController.swift in Sources */,
+				55FA022927F06318009A6AB4 /* APICaller.swift in Sources */,
+				55FA022627EF2CAB009A6AB4 /* Repo.swift in Sources */,
 				55FA020C27EE88E8009A6AB4 /* AppDelegate.swift in Sources */,
+				55FA023027F38449009A6AB4 /* RepoPreviewViewModel.swift in Sources */,
+				55FA022E27F1E4C6009A6AB4 /* RepoDetailsViewController.swift in Sources */,
 				55FA020E27EE88E8009A6AB4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
