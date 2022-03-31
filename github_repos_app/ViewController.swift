@@ -24,9 +24,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
-        
         title = "Github Trends"
         
         view.backgroundColor = .systemBackground
@@ -35,12 +32,7 @@ class ViewController: UIViewController {
         table.delegate = self
         table.dataSource = self
         fetchData()
-//        view.addSubview(labelica)
-        //mora da se napravi posebno pa preko navbara da se nagalvi labelica sa naslovom u centar
-//        navigationItem.
-        
-        
-        //TODO proveri ovde zato sto kada se okrene ekran nije lepa tabela preko celog ekrana
+
         
 
         }
@@ -76,7 +68,7 @@ class ViewController: UIViewController {
                     var indexPaths = Array((firstCellIndex...lastCellIndex)).map { index in
                         IndexPath(row: index , section: 0)
                     }
-                    self?.table.insertRows(at: indexPaths, with: .right)
+                    self?.table.insertRows(at: indexPaths, with: .none)
 //                    self?.table.reloadData()
 
                 }
@@ -109,7 +101,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             }
         sortList()
         let repo = repos[indexPath.row]
-//        print(repo)
+
         cell.configure(with: RepoViewModel(full_name: repo.full_name ?? " ", description: repo.description ?? " ", stargazers_count: repo.stargazers_count ?? 0))
         
         

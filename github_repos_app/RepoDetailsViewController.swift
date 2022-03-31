@@ -10,23 +10,18 @@ import UIKit
 
 class RepoDetailsViewController: UIViewController {
     
-    private let starPic: UIButton = {
-        let button = UIButton()
-        var image = UIImage(systemName: "star.fill",withConfiguration: UIImage.SymbolConfiguration(pointSize: 15))
-//        image = image?.withRenderingMode(.alwaysOriginal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(image, for: .normal)
-        button.tintColor = .white
-        return button
+    let starImgView : UIImageView = {
+        var imgView = UIImageView(image: UIImage(systemName: "star.fill"))
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.tintColor = .white
+        return imgView
     }()
-    private let forkPic: UIButton = {
-        let button = UIButton()
-        var image = UIImage(systemName: "tuningfork",withConfiguration: UIImage.SymbolConfiguration(pointSize: 15))
-//        image = image?.withRenderingMode(.alwaysOriginal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(image, for: .normal)
-        button.tintColor = .white
-        return button
+    
+    let forkImgView : UIImageView = {
+        var imgView = UIImageView(image: UIImage(systemName: "tuningfork"))
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.tintColor = .white
+        return imgView
     }()
     
     var avatarImg: UIImageView = {
@@ -77,25 +72,14 @@ class RepoDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//
-//        let attrs = [
-//            NSAttributedString.Key.foregroundColor: UIColor.white,
-//            NSAttributedString.Key.font: UIFont(name: "Georgia-Bold", size: 5)!
-//        ]
-//
-//        UINavigationBar.appearance().titleTextAttributes = attrs
-        
-        
+
         view.backgroundColor = .systemBackground
         view.addSubview(titleLabel)
         view.addSubview(avatarImg)
-//        view.addSubview(fullNameLabel)
-//        navigationController?.navigationBar.prefersLargeTitles = false
-        //namestanje da title u navbaru, samo za ovaj viewcontroller
         navigationItem.largeTitleDisplayMode = .never
         title = fullNameLabel.text
-        view.addSubview(starPic)
-        view.addSubview(forkPic)
+        view.addSubview(starImgView)
+        view.addSubview(forkImgView)
         view.addSubview(descriptionLabel)
         view.addSubview(numberOfStars)
         view.addSubview(numberOfForks)
@@ -104,15 +88,7 @@ class RepoDetailsViewController: UIViewController {
         
     
     }
-//    override func viewDidAppear(_ animated: Bool) {
-////        let nav = self.navigationController?.navigationBar
-////        nav!.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "CaviarDreams", size: 10)]
-//        let attributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 10)!]
-//        UINavigationBar.appearance().titleTextAttributes = attributes
-//        navigationItem.title = fullNameLabel.text
-//
-//    }
-    
+
     func applyConstraints(){
         
         let avatarImgConstraints = [
@@ -135,37 +111,38 @@ class RepoDetailsViewController: UIViewController {
 //            descriptionLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ]
         
-        let starPicConstraints = [
-//            starPic.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            starPic.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
-            starPic.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100)
+
+        let starImgViewConstraints = [
+            starImgView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
+            starImgView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100),
+            starImgView.widthAnchor.constraint(equalToConstant: 20),
+            starImgView.heightAnchor.constraint(equalToConstant: 20),
+            
         ]
         
         let numberOfStarsConstraint = [
-            numberOfStars.leadingAnchor.constraint(equalTo: starPic.trailingAnchor, constant: 10),
+            numberOfStars.leadingAnchor.constraint(equalTo: starImgView.trailingAnchor, constant: 10),
             numberOfStars.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
-//            numberOfStars.trailingAnchor.constraint(equalTo: forkPic.leadingAnchor, constant: 10)
-//            numberOfStars.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-//            numberOfStars.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+
         ]
-        let forkPicConstraints = [
-            forkPic.leadingAnchor.constraint(equalTo: numberOfStars.trailingAnchor, constant: 20),
-            forkPic.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
+
+        let forkImgViewConstraints = [
+            forkImgView.leadingAnchor.constraint(equalTo: numberOfStars.trailingAnchor, constant: 20),
+            forkImgView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
+            forkImgView.widthAnchor.constraint(equalToConstant: 20),
+            forkImgView.heightAnchor.constraint(equalToConstant: 20)
         ]
         let numberOfForksConstraint = [
-//            numberOfForks.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 50),
             numberOfForks.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
-            numberOfForks.leadingAnchor.constraint(equalTo: forkPic.trailingAnchor, constant: 15),
-//            numberOfForks.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 50),
-//            numberOfForks.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            numberOfForks.leadingAnchor.constraint(equalTo: forkImgView.trailingAnchor, constant: 15),
         ]
         
         NSLayoutConstraint.activate(avatarImgConstraints)
         NSLayoutConstraint.activate(titleLabelConstraints)
         NSLayoutConstraint.activate(descriptionLabelConstraints)
-        NSLayoutConstraint.activate(starPicConstraints)
+        NSLayoutConstraint.activate(starImgViewConstraints)
         NSLayoutConstraint.activate(numberOfStarsConstraint)
-        NSLayoutConstraint.activate(forkPicConstraints)
+        NSLayoutConstraint.activate(forkImgViewConstraints)
         NSLayoutConstraint.activate(numberOfForksConstraint)
         
     }
@@ -179,14 +156,6 @@ class RepoDetailsViewController: UIViewController {
         guard let url = URL(string: model.avatar_url) else {return}
         avatarImg.load(url: url)
                 
-//                guard let url = URL(string: "\(Constants.baseURL)/3/trending/movie/day?api_key=\(Constants.API_KEY)") else {return}
-        
-//        title = fullNameLabel.text
-//        navigationItem.title = fullNameLabel.text
-        
-        
-//        guard let url = URL(string: "https://www.youtube.com/embed/\(model.youtubeVideo.id.videoId)") else {return}
-//        webView.load(URLRequest(url: url))
     }
 }
 extension UIImageView {

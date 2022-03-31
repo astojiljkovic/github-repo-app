@@ -21,29 +21,10 @@ class TableViewCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
-    //TODO pronadji kako ubaciti SF ovde
-    let starImg: UIImage = {
-//        let image = UIImage()
-//        var image = UIImage(systemName: "play.circle",withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
-        var image = UIImage(systemName: "star")
-//        image?.withTintColor(.white)
-
-        
-        return image!
-    }()
     
-    private let playTitleButton: UIButton = {
-        let button = UIButton()
-        var image = UIImage(systemName: "star",withConfiguration: UIImage.SymbolConfiguration(pointSize: 15))
-//        image = image?.withRenderingMode(.alwaysOriginal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(image, for: .normal)
-        button.tintColor = .white
-        return button
-    }()
     
     let starImgView : UIImageView = {
-        var imgView = UIImageView()
+        var imgView = UIImageView(image: UIImage(systemName: "star"))
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.tintColor = .white
         return imgView
@@ -67,10 +48,9 @@ class TableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .systemBackground
-        starImgView.image = starImg
+
         contentView.addSubview(titleLabel)
-//        contentView.addSubview(starImgView)
-        contentView.addSubview(playTitleButton)
+        contentView.addSubview(starImgView)
         contentView.addSubview(numberOfStars)
         contentView.addSubview(descLabel)
         applyConstraints()
@@ -89,17 +69,14 @@ class TableViewCell: UITableViewCell {
         
         let starImgViewConstraints = [
             starImgView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            starImgView.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 50),
+            starImgView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            starImgView.widthAnchor.constraint(equalToConstant: 20),
+            starImgView.heightAnchor.constraint(equalToConstant: 20)
 //            starImgView.bottomAnchor.constraint(equalTo: descLabel.topAnchor, constant: 10)
         ]
-        let playTitleButtonConstraints = [
-            playTitleButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            playTitleButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10)
-            
-            
-        ]
+
         let numberOfStarsConstraints = [
-            numberOfStars.leadingAnchor.constraint(equalTo: playTitleButton.trailingAnchor, constant: 10),
+            numberOfStars.leadingAnchor.constraint(equalTo: starImgView.trailingAnchor, constant: 10),
             numberOfStars.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             
 //            numberOfStars.bottomAnchor.constraint(equalTo: descLabel.topAnchor, constant: 20)
@@ -115,8 +92,7 @@ class TableViewCell: UITableViewCell {
         
         
         NSLayoutConstraint.activate(titleLabelConstraints)
-//        NSLayoutConstraint.activate(starImgViewConstraints)
-        NSLayoutConstraint.activate(playTitleButtonConstraints)
+        NSLayoutConstraint.activate(starImgViewConstraints)
         NSLayoutConstraint.activate(numberOfStarsConstraints)
         NSLayoutConstraint.activate(descLabelConstraints)
     }
