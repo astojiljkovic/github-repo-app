@@ -20,6 +20,7 @@
 		55FA022C27F07162009A6AB4 /* RepoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA022B27F07162009A6AB4 /* RepoViewModel.swift */; };
 		55FA022E27F1E4C6009A6AB4 /* RepoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA022D27F1E4C5009A6AB4 /* RepoDetailsViewController.swift */; };
 		55FA023027F38449009A6AB4 /* RepoPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA022F27F38449009A6AB4 /* RepoPreviewViewModel.swift */; };
+		55FA023227F60E72009A6AB4 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA023127F60E72009A6AB4 /* SearchResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		55FA022B27F07162009A6AB4 /* RepoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewModel.swift; sourceTree = "<group>"; };
 		55FA022D27F1E4C5009A6AB4 /* RepoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailsViewController.swift; sourceTree = "<group>"; };
 		55FA022F27F38449009A6AB4 /* RepoPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPreviewViewModel.swift; sourceTree = "<group>"; };
+		55FA023127F60E72009A6AB4 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				55FA020F27EE88E8009A6AB4 /* ViewController.swift */,
 				55FA022D27F1E4C5009A6AB4 /* RepoDetailsViewController.swift */,
 				55FA022227EE8A18009A6AB4 /* TableViewCell.swift */,
+				55FA023127F60E72009A6AB4 /* SearchResultViewController.swift */,
 				55FA021127EE88E8009A6AB4 /* Main.storyboard */,
 				55FA021727EE88EB009A6AB4 /* Assets.xcassets */,
 				55FA021927EE88EB009A6AB4 /* LaunchScreen.storyboard */,
@@ -191,6 +194,7 @@
 				55FA022627EF2CAB009A6AB4 /* Repo.swift in Sources */,
 				55FA020C27EE88E8009A6AB4 /* AppDelegate.swift in Sources */,
 				55FA023027F38449009A6AB4 /* RepoPreviewViewModel.swift in Sources */,
+				55FA023227F60E72009A6AB4 /* SearchResultViewController.swift in Sources */,
 				55FA022E27F1E4C6009A6AB4 /* RepoDetailsViewController.swift in Sources */,
 				55FA020E27EE88E8009A6AB4 /* SceneDelegate.swift in Sources */,
 			);

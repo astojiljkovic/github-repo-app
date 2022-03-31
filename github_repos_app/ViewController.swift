@@ -10,7 +10,14 @@ import UIKit
 class ViewController: UIViewController {
     
     private var repos: [Repo] = []
-        
+    private var searchredRepos: [Repo] = []
+    
+    private let searchController: UISearchController = {
+        let controller = UISearchController(searchResultsController: SearchResultViewController())
+        controller.searchBar.placeholder = "Search for repo"
+        controller.searchBar.searchBarStyle = .minimal
+        return controller
+    }()
     
     private let table: UITableView = {
         let table = UITableView()
@@ -25,15 +32,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Github Trends"
-        
+        navigationItem.searchController = searchController
         view.backgroundColor = .systemBackground
+        searchController.searchResultsUpdater = self
         view.addSubview(table)
-        
         table.delegate = self
         table.dataSource = self
         fetchData()
-
-        
 
         }
     
@@ -129,13 +134,44 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let defaultOffset = view.safeAreaInsets.top
-//        let offset = scrollView.contentOffset.y + defaultOffset
-//
-//        navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0,-offset))
-//    }
-    
+}
+extension ViewController: UISearchResultsUpdating, SearchResultsViewControllerDelegate{
+    func updateSearchResults(for searchController: UISearchController) {
 
+        let searchBar = searchController.searchBar
+
+        guard let query = searchBar.text,
+              let resultsController = searchController.searchResultsController as? SearchResultViewController else {return}
+
+        resultsController.delegate = self
+
+        APICaller.shared.search(with: query) { result in
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let titles):
+                    DispatchQueue.main.async {
+                        resultsController.repos = titles
+                        resultsController.table.reloadData()
+                    }
+
+                case .failure( _):
+                    print("")
+                }
+            }
+        }
+
+        
+    }
+    
+    func searchResultsViewControllerDidTapItem(_ viewModel: RepoPreviewViewModel) {
+        
+        DispatchQueue.main.async { [weak self] in
+            let vc = RepoDetailsViewController()
+            vc.configure(with: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+     
+    }
     
 }
+

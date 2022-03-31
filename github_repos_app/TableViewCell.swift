@@ -14,6 +14,7 @@ class TableViewCell: UITableViewCell {
     static let identifier = "TableViewCell"
     
     
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

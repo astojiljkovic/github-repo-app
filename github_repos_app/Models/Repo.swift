@@ -13,7 +13,6 @@ struct ReposResponse: Codable {
 }
 
 struct Repo: Codable {
-//    let allow_forking: Int
     let name: String?
     let full_name: String?
     let description: String?
