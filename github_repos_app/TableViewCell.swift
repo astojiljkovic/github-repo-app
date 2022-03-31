@@ -13,7 +13,7 @@ class TableViewCell: UITableViewCell {
     
     static let identifier = "TableViewCell"
     
-    //TODO podesi naravno malo veci size
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -72,22 +72,17 @@ class TableViewCell: UITableViewCell {
             starImgView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             starImgView.widthAnchor.constraint(equalToConstant: 20),
             starImgView.heightAnchor.constraint(equalToConstant: 20)
-//            starImgView.bottomAnchor.constraint(equalTo: descLabel.topAnchor, constant: 10)
         ]
 
         let numberOfStarsConstraints = [
             numberOfStars.leadingAnchor.constraint(equalTo: starImgView.trailingAnchor, constant: 10),
             numberOfStars.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            
-//            numberOfStars.bottomAnchor.constraint(equalTo: descLabel.topAnchor, constant: 20)
         ]
         
         let descLabelConstraints = [
             descLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             descLabel.topAnchor.constraint(equalTo: numberOfStars.bottomAnchor, constant: 10),
             descLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -20),
-//            descLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 5)
-            
         ]
         
         

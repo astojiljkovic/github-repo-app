@@ -107,14 +107,12 @@ class RepoDetailsViewController: UIViewController {
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20)
-//            descriptionLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ]
         
 
         let starImgViewConstraints = [
             starImgView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
-            starImgView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100),
+            starImgView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -65),
             starImgView.widthAnchor.constraint(equalToConstant: 20),
             starImgView.heightAnchor.constraint(equalToConstant: 20),
             
@@ -127,14 +125,14 @@ class RepoDetailsViewController: UIViewController {
         ]
 
         let forkImgViewConstraints = [
-            forkImgView.leadingAnchor.constraint(equalTo: numberOfStars.trailingAnchor, constant: 20),
+            forkImgView.leadingAnchor.constraint(equalTo: numberOfStars.trailingAnchor, constant: 35),
             forkImgView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
             forkImgView.widthAnchor.constraint(equalToConstant: 20),
             forkImgView.heightAnchor.constraint(equalToConstant: 20)
         ]
         let numberOfForksConstraint = [
             numberOfForks.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
-            numberOfForks.leadingAnchor.constraint(equalTo: forkImgView.trailingAnchor, constant: 15),
+            numberOfForks.leadingAnchor.constraint(equalTo: forkImgView.trailingAnchor, constant: 10),
         ]
         
         NSLayoutConstraint.activate(avatarImgConstraints)
@@ -150,8 +148,8 @@ class RepoDetailsViewController: UIViewController {
         
         titleLabel.text = model.title
         descriptionLabel.text = model.description
-        numberOfStars.text = "\(String(model.numberOfStars)) Stars"
-        numberOfForks.text = "\(String(model.numberOfForks)) Forks"
+        numberOfStars.text = "\(String(model.numberOfStars))"
+        numberOfForks.text = "\(String(model.numberOfForks))"
         fullNameLabel.text = model.fullName
         guard let url = URL(string: model.avatar_url) else {return}
         avatarImg.load(url: url)

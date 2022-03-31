@@ -69,7 +69,6 @@ class ViewController: UIViewController {
                         IndexPath(row: index , section: 0)
                     }
                     self?.table.insertRows(at: indexPaths, with: .none)
-//                    self?.table.reloadData()
 
                 }
             case .failure(let error):
@@ -84,13 +83,10 @@ class ViewController: UIViewController {
         repos = repos.sorted(by: {$0.stargazers_count! > $1.stargazers_count!})
     }
 
-
-
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        print(repos.count)
         return repos.count
     }
     

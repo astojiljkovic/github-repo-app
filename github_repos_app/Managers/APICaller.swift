@@ -17,12 +17,9 @@ class APICaller {
     
     static let shared = APICaller()
     
-    
     func getRepos(completion: @escaping (Result<[Repo],Error>) -> Void){
 
-        
         let date = Calendar.current.date(byAdding: .day , value: -7, to: .now)!
-        
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
@@ -35,10 +32,8 @@ class APICaller {
             components.queryItems = [
                 URLQueryItem(name: "q", value: "created:>\(dateFormatter.string(from: date))")
             ]
-//        print(components.url)
-        guard let url = components.url else {return}
 
-//        print("ovde sam oopet")
+        guard let url = components.url else {return}
 
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _ , error in
             guard let data = data, error == nil else {
@@ -47,18 +42,13 @@ class APICaller {
             do{
                 
                 let results = try JSONDecoder().decode(ReposResponse.self, from: data)
-//                let decoder = JSONDecoder()
-//                decoder.keyDecodingStrategy = .convertFromSnakeCase
-//               let results = try decoder.decode(ReposResponse.self, from: data)
-//                let results = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-//                print(results)
 
                 completion(.success(results.items))
-//                print("u do")
+
             }catch(let error){
                 
                 print(error)
-//                print("u catch")
+
 
                 completion(.failure(error))
                 
